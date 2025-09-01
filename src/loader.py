@@ -43,10 +43,12 @@ class Loader:
 
         config = None
         toml_path = os.path.join(folder_path, "config.toml")
+
         if os.path.exists(toml_path):
             config = tomllib.load(open(toml_path, "rb"))
             config = SourceConfig(**config)
-        config = SourceConfig()
+        else:
+            config = SourceConfig()
 
         if not os.path.exists(os.path.join(folder_path, config.entry_file)):
             raise FileNotFoundError(
