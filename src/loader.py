@@ -16,7 +16,7 @@ class Loader:
         self.path = os.path.dirname(self.pathname)
         self.configs = []
 
-    def load_configs(self):
+    def load_configs(self) -> list[SourceConfig]:
         """Loads configs from the specified directory"""
         self._validate_configs()
         return self.configs
@@ -36,7 +36,7 @@ class Loader:
             self.configs.append(config)
 
     @staticmethod
-    def _validate_config_folder(folder_path: str):
+    def _validate_config_folder(folder_path: str) -> SourceConfig:
         """Validates a folder has a valid entry file"""
         if not os.path.exists(folder_path):
             raise FileNotFoundError(f"Folder not found: {folder_path}")
