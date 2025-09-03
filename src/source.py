@@ -7,6 +7,7 @@ from subprocess import Popen, PIPE
 class SourceConfig(BaseModel):
     folder_path: str
     entry_file: str = "entry.sh"
+    dependencies: list[str] = []
 
     def entry_cmd(self):
         return os.path.join(self.folder_path, self.entry_file)
