@@ -1,11 +1,7 @@
 import os
 import tomllib
 
-from pydantic import BaseModel
-
-
-class SourceConfig(BaseModel):
-    entry_file: str = "entry.sh"
+from .source import SourceConfig
 
 
 class Loader:
@@ -46,9 +42,9 @@ class Loader:
 
         if os.path.exists(toml_path):
             config = tomllib.load(open(toml_path, "rb"))
-            config = SourceConfig(**config)
+            config = SourceConfig(**config, folder_path=folder_path)
         else:
-            config = SourceConfig()
+            config = SourceConfig(folder_path=folder_path)
 
         if not os.path.exists(os.path.join(folder_path, config.entry_file)):
             raise FileNotFoundError(
